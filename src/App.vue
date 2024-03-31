@@ -5,10 +5,18 @@
   <div class="content">
     <div class="left-side-div">
       <div class="left-side">
-        <h1>Knowledge Book</h1>
-        <span>from UniquePixels</span>
-        <router-link to="/" class="redirect">Home</router-link>
-        <router-link to="/create" class="redirect">Create Project</router-link>
+        <div class="left-header">
+          <h1>Knowledge Book</h1>
+          <span>from UniquePixels</span>
+        </div>
+        <router-link to="/" class="redirect">
+          <img src="./assets/icons/home.svg">
+          Home
+        </router-link>
+        <router-link to="/create" class="redirect">
+          <img src="./assets/icons/add.svg">
+          Create Project
+        </router-link>
       </div>
     </div>
     <div class="right-side">
@@ -18,6 +26,16 @@
 </template>
 
 <style>
+
+router-link {
+  display: flex;
+  align-items: center;
+}
+
+.redirect img {
+  height: 30px;
+  margin-right: 5px;
+}
 
 .left-side span {
   font-style: italic;
@@ -36,7 +54,7 @@ header {
 }
 
 .left-side-div {
-  position: absolute;
+  position: fixed;
   height: 100%;
 }
 
@@ -44,37 +62,37 @@ h1 {
   color: var(--vt-c-indigo)
 }
 
+.left-header {
+  margin: 10px;
+  margin-bottom: 50px;
+}
+
 .redirect {
   color: white;
+  font-size: 20px;
   text-decoration: none;
-  border: 2px solid var(--vt-c-indigo);
   display: flex;
-  justify-content: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  justify-content: flex-start;
   transition: 0.2s;
+  padding: 10px;
 }
 
 .redirect:hover {
-  box-shadow: rgba(0, 0, 0, 0.2) 5px 5px;
+  background-color: var(--vt-c-indigo);
 }
 
 .left-side {
   display: flex;
   flex-direction: column;
   width: 250px;
-  padding: 10px;
   background-color: var(--color-background-soft);
   min-height: 100%;
   align-items: stretch;
 }
 
 .right-side {
-  padding-left: 270px;
-  padding-top: 20px;
+  margin-left: 270px;
+  margin-top: 20px;
 }
 
 h2 {

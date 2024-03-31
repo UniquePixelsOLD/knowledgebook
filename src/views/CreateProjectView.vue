@@ -5,13 +5,20 @@ export default {
   data() {
     return {
       projectName: null,
-      projectId: null
+      projectId: null,
+      projectDescription: null
     }
   },
   methods: {
+
+    redirectError() {
+
+    },
+
     createProject() {
       axios.post("http://localhost:8080/translation/create", {
-        projectName: this.projectName
+        projectName: this.projectName,
+        projectDescription: this.projectDescription
       }, {
         headers: {
           "Content-Type": "application/json"
@@ -32,6 +39,11 @@ export default {
     <div class="input-field">
       <p>Bitte gib hier den Projektnamen an</p>
       <input v-model="this.projectName">
+    </div>
+
+    <div class="input-field">
+      <p>Bitte gib hier die Projektbeschreibung an</p>
+      <input v-model="this.projectDescription">
     </div>
 
     <div class="input-field">

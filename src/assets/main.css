@@ -3,8 +3,15 @@
 body {
   margin: 0px;
 }
-
 p {
   color: var(--vt-c-white-soft);
   font-size: 16px;
+}
+
+
+.material-icons {
+  font-style: normal;
+}
+.material-icons span {
+  font-style: normal;
 }
