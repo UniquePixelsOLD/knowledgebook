@@ -1,9 +1,10 @@
 @import './base.css';
 
 body {
-  margin: 0px;
-  font-size: 30px;
+  margin: 0;
+  font-size: 20px;
 }
+
 p {
   color: var(--vt-c-white-soft);
   font-size: 16px;
