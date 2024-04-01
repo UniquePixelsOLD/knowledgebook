@@ -82,6 +82,7 @@ h1 {
 }
 
 .left-side {
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   width: 250px;

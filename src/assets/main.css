@@ -2,6 +2,7 @@
 
 body {
   margin: 0px;
+  font-size: 30px;
 }
 p {
   color: var(--vt-c-white-soft);
@@ -14,4 +15,25 @@ p {
 }
 .material-icons span {
   font-style: normal;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  border: 2px solid gray;
+  border-radius: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-background-soft);
+  border: 2px solid var(--color-background-soft);
+  border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border: 2px solid gray;
+  border-radius: 20px;
 }

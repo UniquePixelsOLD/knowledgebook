@@ -4,24 +4,18 @@ import axios from "axios";
 export default {
   data() {
     return {
-      content: []
+      content: [],
+      error: null
     }
   },
   mounted() {
     this.loadProjects()
   },
   methods: {
+    redirectToPage(projectId) {
+      this.$router.push({path: '/project', query: {projectId: projectId}})
+    },
     loadProjects() {
-
-      //fetch("http://localhost:8080/translation/all", {
-      //  headers: {
-      //    "Authentication": "Bearer hallo",
-      //    "Content-Type": "application/json"
-      //  }
-      //}).then(value => {
-      //  this.content = value.body
-      //})
-
       axios.get("http://localhost:8080/translation/all")
           .then(value => {
             console.log(value.status)
@@ -29,46 +23,47 @@ export default {
             console.log(this.content)
           })
           .catch(reason => {
-            console.log(reason)
+
+            if (reason.response.status != 200) {
+              this.error = reason.response.status;
+              return
+            }
+
           })
     }
   }
-  //watch: {
-  //  '$route': {
-  //    handler: function (to, from) {
-//
-  //      if (from === undefined) {
-  //        return
-  //      }
-//
-  //      console.log("From " + from.query + " to " + to.query);
-  //      this.setupProjectId();
-  //    },
-  //    immediate: true
-  //  }
-  //}
+
 }
 </script>
 
 <template>
-  <div class="projects" v-for="projects in this.content">
 
-    <div class="project">
+  <div v-if="error" class="error">
+    <h2>{{ this.error }} Nothing to display...</h2>
+  </div>
+  <div v-else>
 
-      <div class="project-info">
-        <div class="left">
-          <h2>{{ projects.projectName }}</h2>
-          <p>{{projects.projectDescription}}</p>
-          <span>{{ projects.projectId }}</span>
+    <div class="projects" v-for="projects in this.content">
+
+      <div class="project">
+
+        <div class="project-info">
+          <div class="left">
+            <h2>{{ projects.projectName }}</h2>
+            <p>{{ projects.projectDescription }}</p>
+            <span>{{ projects.projectId }}</span>
+          </div>
+          <div class="right">
+            <button class="edit" @click="this.redirectToPage(projects.projectId)">
+              Edit
+            </button>
+            <button class="delete">Delete</button>
+          </div>
         </div>
-        <div class="right">
-          <button class="edit">Edit</button>
-          <button class="delete">Delete</button>
-        </div>
+
       </div>
 
     </div>
-
   </div>
 
 </template>
@@ -93,7 +88,7 @@ export default {
 }
 
 .project:hover {
-  border-color: black;
+  border-color: rgb(60, 60, 60);
 }
 
 .left {
@@ -110,19 +105,32 @@ button {
   background-color: var(--color-background-mute);
   border: 2px solid white;
   padding: 5px;
-  width: 90px;
+  width: 120px;
+  height: 35px;
   margin: 5px;
   border-radius: 30px;
   color: white;
 }
 
 .edit {
+  transition: 0.3s;
   background-color: #4d4dec;
   border-color: #4d4dec;
 }
 
+.edit:hover {
+  background-color: #5757ef;
+  border-color: #5757ef;
+}
+
 .delete {
+  transition: 0.3s;
   background-color: #f83434;
   border-color: #f83434;
+}
+
+.delete:hover {
+  background-color: #fb4141;
+  border-color: #fb4141;
 }
 </style>
