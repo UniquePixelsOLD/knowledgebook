@@ -7,14 +7,14 @@ export default {
   components: {SaveNotification},
   props: {
     projectId: String,
-    languages: {},
+    languages: [],
     translationKey: String
   },
   data() {
     return {
       selectedLanguage: '',
       translation: null,
-      unsaved: false
+      unsaved: false,
     }
   },
   methods: {
@@ -26,14 +26,18 @@ export default {
           .then(value => {
             if (value.status === 200) {
 
-              console.log(value.data.translations);
+              let translation = value.data.translations[this.translationKey];
 
-              this.$emit('update-translations', value.data.translations);
+              console.log(translation);
+              console.log(typeof translation);
+
+              this.$emit('updateTranslations');
             }
           })
           .catch(reason => {
             console.log(reason)
           })
+
 
     },
 

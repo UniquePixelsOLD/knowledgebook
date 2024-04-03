@@ -49,7 +49,6 @@ export default {
           :project-id="projects.projectId"
           :project-name="projects.projectName"
           :translations="projects.translations">
-
       </SelectableProject>
 
     </div>

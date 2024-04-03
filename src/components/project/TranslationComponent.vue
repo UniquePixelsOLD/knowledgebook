@@ -3,33 +3,43 @@
 import TranslationEntry from "@/components/project/TranslationEntry.vue";
 import SelectableProject from "@/components/projects/SelectableProject.vue";
 import AddTranslation from "@/components/project/AddTranslation.vue";
+import axios from "axios";
 
 export default {
   components: {AddTranslation, SelectableProject, TranslationEntry},
   props: {
     projectId: String,
-    translation: {
-      type: Array,
-      required: true
-    },
+    translation: [],
     translationKey: String,
-    languages: {
-      type: Array,
-      required: true
-    }
+    languages: []
   },
   data() {
     return {
-      remainingLanguages: {}
+      remainingLanguages: {
+        type: Array
+      }
     }
   },
   methods: {
     reloadRemainingLanguages() {
       this.remainingLanguages = this.languages.filter(lang => this.translation[lang] === undefined);
     },
-    created() {
-      this.reloadRemainingLanguages()
+    refreshComponent(data) {
+
+      axios.get("http://localhost:8080/translation/" + this.projectId)
+          .then(value => {
+
+            this.translation = value.data.translations[this.translationKey];
+            this.reloadRemainingLanguages();
+
+          }).catch(reason => {
+        console.log(reason);
+      })
+
     }
+  },
+  mounted() {
+    this.reloadRemainingLanguages()
   }
 }
 
@@ -53,7 +63,7 @@ export default {
 
     <AddTranslation :languages="this.remainingLanguages"
                     :project-id="this.projectId"
-                    :translation-key="this.translationKey"></AddTranslation>
+                    :translation-key="this.translationKey" @updateTranslations="this.refreshComponent"></AddTranslation>
 
   </div>
 

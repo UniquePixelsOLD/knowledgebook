@@ -12,9 +12,7 @@ export default {
       projectId: null,
       projectDescription: null,
       languages: [],
-      translations: {
-        type: Array
-      },
+      translations: [],
       error: null,
       search: null
     }
@@ -27,7 +25,7 @@ export default {
             this.projectName = value.data.projectName;
             this.projectId = value.data.projectId;
             this.projectDescription = value.data.projectDescription;
-            this.translations = Array.call(value.data.translations);
+            this.translations = value.data.translations;
             this.languages = value.data.languages;
 
             console.log(value.data);
@@ -67,6 +65,7 @@ export default {
     </div>
 
     <div class="content">
+
       <SearchComponent></SearchComponent>
 
       <div class="divider"></div>
@@ -74,11 +73,11 @@ export default {
       <div class="translations">
 
         <TranslationComponent
-                              v-for="key in Object.keys(translations)"
-                              :project-id="this.projectId"
-                              :translation="this.translations[key]"
-                              :translation-key="key"
-                              :languages="this.languages"
+            v-for="key in Object.keys(translations)"
+            :project-id="this.projectId"
+            :translation="this.translations[key]"
+            :translation-key="key"
+            :languages="this.languages"
         ></TranslationComponent>
 
       </div>
